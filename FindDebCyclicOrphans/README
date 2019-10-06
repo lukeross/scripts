@@ -1,0 +1,8 @@
+find_deb_cyclic_orphans
+=======================
+
+This script was taken from that contributed by gnack at
+<http://forums.debian.net/viewtopic.php?f=10&t=74238>.
+
+It got upset on multiarch machines, so I added an easy(-ish) way to exclude
+architectures, and I've also updated it to python 3.

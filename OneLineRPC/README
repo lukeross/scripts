@@ -1,0 +1,14 @@
+One-line RPC
+============
+
+This was based on a silly discussion at $job about a colleague who left their
+computer unlocked. It runs a daemon that accepts connections and forks a
+bash shell for each. The requirements were that it doesn't need any additional
+software installing on a typical Linux host, and is short enough to type
+in at the keyboard.
+
+Copyright (C) 2019 by Luke Ross
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.6.0 or,
+at your option, any later version of Perl 5 you may have available.

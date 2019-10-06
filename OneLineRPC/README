@@ -7,7 +7,7 @@ bash shell for each. The requirements were that it doesn't need any additional
 software installing on a typical Linux host, and is short enough to type
 in at the keyboard.
 
-Copyright (C) 2019 by Luke Ross
+Copyright (C) 2017-2019 by Luke Ross
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.6.0 or,

@@ -1,16 +1,27 @@
 #!/usr/bin/env python3
 
+import argparse
 import apt_pkg
 
-holds = ['PreDepends', 'Depends', 'Recommends']
 pkgs = set()
 keeps = set()
 virtuals = {}
-exclude_archs = {"i386",}
 
 apt_pkg.init()
 cache = apt_pkg.Cache()
 dep_cache = apt_pkg.DepCache(cache)
+
+parser = argparse.ArgumentParser(
+    description='Check for circular-dependency dpkg orphans')
+parser.add_argument(
+    '-x', nargs='*', help='Exclude these archs', default=[])
+parser.add_argument(
+    '-f', nargs='*',
+    help='Hold these fields, default: PreDepends Depends Recommends',
+    default=['PreDepends', 'Depends', 'Recommends'])
+args = parser.parse_args()
+exclude_archs = args.x
+holds = args.f
 
 
 def flag_provides(virtual, pkg):

@@ -41,14 +41,15 @@ def hold_pkg(pkg):
 
     if pkg.provides_list:
         flag_provides(pkg.name, pkg)
-        hold_provides(pkg.provides_list)
+        hold_provides(pkg.provides_list, pkg.name)
 
 
-def hold_provides(provides_list):
+def hold_provides(provides_list, from_pkg=''):
     for provides in provides_list:
         if provides[2].parent_pkg.architecture not in exclude_archs:
             flag_provides(provides[0], provides[2].parent_pkg)
-            hold_pkg(provides[2].parent_pkg)
+            if provides[2].parent_pkg.name != from_pkg:
+                hold_pkg(provides[2].parent_pkg)
 
 
 def hold_dependencies(dep_dict):

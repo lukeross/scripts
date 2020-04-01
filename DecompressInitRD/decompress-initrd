@@ -1,0 +1,3 @@
+#!/bin/sh
+
+(cpio -id; lz4cat | cpio -id) < /boot/initrd.img-`uname -r`-generic

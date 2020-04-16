@@ -3,5 +3,4 @@ Scripts
 
 Miscellaneous small scripts that don't warrant their own repository.
 
-Each directory should include a README describing the script and a
-license file.
+Each directory should include a README describing the script and license.

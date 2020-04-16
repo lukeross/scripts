@@ -1,6 +1,9 @@
 find_deb_cyclic_orphans
 =======================
 
+Find deb packages which are not marked as auto-removable because they
+participate in a circular dependency loop.
+
 This script was taken from that contributed by gnack at
 <http://forums.debian.net/viewtopic.php?f=10&t=74238>.
 

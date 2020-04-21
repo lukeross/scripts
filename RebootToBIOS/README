@@ -1,0 +1,5 @@
+reboot_to_bios
+--------------
+
+Allows me to reboot into the BIOS if it has been configured to "fast boot"
+which disables the USB keyboard.

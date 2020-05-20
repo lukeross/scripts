@@ -1,0 +1,46 @@
+diff --git a/debian.master/rules.d/amd64.mk b/debian.master/rules.d/amd64.mk
+index b1f62a796..e63c64740 100644
+--- a/debian.master/rules.d/amd64.mk
++++ b/debian.master/rules.d/amd64.mk
+@@ -21,7 +21,3 @@ do_tools_host = true
+ do_extras_package = true
+ do_tools_common = true
+ do_tools_acpidbg = true
+-do_zfs		= true
+-do_dkms_nvidia  = true
+-do_dkms_vbox    = true
+-do_dkms_wireguard = true
+diff --git a/debian/rules.d/4-checks.mk b/debian/rules.d/4-checks.mk
+index 3ce7e6e6f..43aadc5a9 100644
+--- a/debian/rules.d/4-checks.mk
++++ b/debian/rules.d/4-checks.mk
+@@ -2,19 +2,19 @@
+ abi-check-%: install-%
+ 	@echo Debug: $@
+ 	@perl -f $(DROOT)/scripts/abi-check "$*" "$(prev_abinum)" "$(abinum)" \
+-		"$(prev_abidir)" "$(abidir)" "$(skipabi)"
++		"$(prev_abidir)" "$(abidir)" "$(skipabi)" || true
+ 
+ # Check the module list against the last release (always)
+ module-check-%: install-%
+ 	@echo Debug: $@
+ 	@perl -f $(DROOT)/scripts/module-check "$*" \
+-		"$(prev_abidir)" "$(abidir)" $(skipmodule)
++		"$(prev_abidir)" "$(abidir)" $(skipmodule) || true
+ 
+ # Check the reptoline jmp/call functions against the last release.
+ retpoline-check-%: install-%
+ 	@echo Debug: $@
+ 	$(SHELL) $(DROOT)/scripts/retpoline-check "$*" \
+-		"$(prev_abidir)" "$(abidir)" "$(skipretpoline)" "$(builddir)/build-$*"
++		"$(prev_abidir)" "$(abidir)" "$(skipretpoline)" "$(builddir)/build-$*" || true
+ 
+ checks-%: module-check-% abi-check-% retpoline-check-%
+ 	@echo Debug: $@
+@@ -23,5 +23,5 @@ checks-%: module-check-% abi-check-% retpoline-check-%
+ config-prepare-check-%: $(stampdir)/stamp-prepare-tree-%
+ 	@echo Debug: $@
+ 	@perl -f $(DROOT)/scripts/config-check \
+-		$(builddir)/build-$*/.config "$(arch)" "$*" "$(commonconfdir)" "$(skipconfig)"
++		$(builddir)/build-$*/.config "$(arch)" "$*" "$(commonconfdir)" "$(skipconfig)" || true
+ 

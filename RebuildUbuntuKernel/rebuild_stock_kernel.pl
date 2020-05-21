@@ -28,7 +28,6 @@ my $BUILD_TYPE = "master";
 ########## END CONFIG #########
 
 use Cwd;
-use LWP::Simple qw(get);
 use Tie::File;
 
 sub apply_patch($) {
@@ -110,6 +109,7 @@ system("fakeroot", "debian/rules", "binary-$NEW_FLAVOUR");
 END { chdir($prevdir) if $prevdir; }
 
 __DATA__
+# CONFIG_RD_BZIP2 is not set
 # CONFIG_SGETMASK_SYSCALL is not set
 # CONFIG_SYSFS_SYSCALL is not set
 # CONFIG_KALLSYMS_ALL is not set
@@ -118,6 +118,8 @@ __DATA__
 # CONFIG_X86_MPPARSE is not set
 # CONFIG_X86_EXTENDED_PLATFORM is not set
 # CONFIG_HYPERVISOR_GUEST is not set
+CONFIG_MATOM=y
+# CONFIG_GENERIC_CPU is not set
 # CONFIG_CPU_SUP_HYGON is not set
 # CONFIG_CPU_SUP_CENTAUR is not set
 # CONFIG_CPU_SUP_ZHAOXIN is not set
@@ -125,8 +127,12 @@ __DATA__
 # CONFIG_CALGARY_IOMMU is not set
 # CONFIG_MAXSMP is not set
 CONFIG_NR_CPUS=4
+# CONFIG_X86_MCELOG_LEGACY is not set
 # CONFIG_X86_16BIT is not set
+# CONFIG_MICROCODE_OLD_INTERFACE is not set
+# CONFIG_AMD_MEM_ENCRYPT is not set
 # CONFIG_NUMA is not set
+# CONFIG_X86_PMEM_LEGACY is not set
 # CONFIG_HIBERNATION is not set
 # CONFIG_PM_DEBUG is not set
 CONFIG_PMIC_OPREGION=y
@@ -137,11 +143,44 @@ CONFIG_XPOWER_PMIC_OPREGION=y
 # CONFIG_CHT_DC_TI_PMIC_OPREGION is not set
 # CONFIG_ISA_BUS is not set
 # CONFIG_KPROBES is not set
+# CONFIG_AIX_PARTITION is not set
+# CONFIG_OSF_PARTITION is not set
+# CONFIG_AMIGA_PARTITION is not set
+# CONFIG_ATARI_PARTITION is not set
+# CONFIG_MAC_PARTITION is not set
+# CONFIG_MINIX_SUBPARTITION is not set
+# CONFIG_SOLARIS_X86_PARTITION is not set
+# CONFIG_UNIXWARE_DISKLABEL is not set
+# CONFIG_LDM_PARTITION is not set
+# CONFIG_SGI_PARTITION is not set
+# CONFIG_ULTRIX_PARTITION is not set
+# CONFIG_SUN_PARTITION is not set
+# CONFIG_KARMA_PARTITION is not set
+# CONFIG_SYSV68_PARTITION is not set
+# CONFIG_CMDLINE_PARTITION is not set
 # CONFIG_MEMORY_HOTPLUG is not set
+# CONFIG_HAMRADIO is not set
+# CONFIG_CAN is not set
+# CONFIG_CAIF is not set
+# CONFIG_NET_IFE is not set
 # CONFIG_EISA is not set
 # CONFIG_HOTPLUG_PCI is not set
+# CONFIG_PCCARD is not set
+# CONFIG_RAPIDIO is not set
+# CONFIG_PARPORT is not set
+# CONFIG_C2PORT is not set
+# CONFIG_GENWQE is not set
+# CONFIG_SATA_INIC162X is not set
+# CONFIG_SATA_ACARD_AHCI is not set
+# CONFIG_SATA_SIL24 is not set
+# CONFIG_ATA_SFF is not set
+# CONFIG_ARCNET is not set
+# CONFIG_ATM_DRIVERS is not set
+# CONFIG_ISDN is not set
 CONFIG_SERIAL_8250=m
 CONFIG_SERIAL_8250_PCI=m
+# CONFIG_SERIAL_8250_RSA is not set
+# CONFIG_SERIAL_8250_RT288X is not set
 CONFIG_SERIAL_MAX310X=m
 CONFIG_SERIAL_CORE=m
 CONFIG_SERIAL_SCCNXP=m
@@ -154,14 +193,44 @@ CONFIG_USB_OHCI_HCD=m
 CONFIG_USB_OHCI_HCD_PCI=m
 # CONFIG_USB_OHCI_HCD_SSB is not set
 CONFIG_USB_OHCI_HCD_PLATFORM=m
+# CONFIG_INFINIBAND is not set
 # CONFIG_VIRTIO_PCI is not set
 # CONFIG_VIRTIO_MMIO is not set
-CONFIG_SQUASHFS=m
+# CONFIG_MELLANOX_PLATFORM is not set
+# CONFIG_MCB is not set
+# CONFIG_FPGA is not set
+# CONFIG_SIOX is not set
+# CONFIG_SLIMBUS is not set
+# CONFIG_INTERCONNECT is not set
+# CONFIG_REISERFS_FS is not set
+# CONFIG_JFS_FS is not set
+# CONFIG_XFS_FS is not set
+# CONFIG_GFS2_FS is not set
+# CONFIG_OCFS2_FS is not set
+# CONFIG_BTRFS_FS is not set
+# CONFIG_NILFS2_FS is not set
+# CONFIG_ORANGEFS_FS is not set
+# CONFIG_ADFS_FS is not set
+# CONFIG_AFFS_FS is not set
+# CONFIG_BEFS_FS is not set
+# CONFIG_BFS_FS is not set
+# CONFIG_VXFS_FS is not set
+# CONFIG_MINIX_FS is not set
+# CONFIG_OMFS_FS is not set
+# CONFIG_HPFS_FS is not set
+# CONFIG_QNX4FS_FS is not set
+# CONFIG_QNX6FS_FS is not set
+# CONFIG_SYSV_FS is not set
+# CONFIG_NFS_FS is not set
+# CONFIG_NFSD is not set
+# CONFIG_CEPH_FS is not set
+# CONFIG_CODA_FS is not set
+# CONFIG_AFS_FS is not set
+# CONFIG_9P_FS is not set
 # CONFIG_SECURITY_SELINUX is not set
 # CONFIG_SECURITY_SMACK is not set
 # CONFIG_SECURITY_TOMOYO is not set
 # CONFIG_IMA is not set
-CONFIG_ZSTD_DECOMPRESS=m
 # CONFIG_DYNAMIC_DEBUG is not set
 # CONFIG_DEBUG_INFO is not set
 # CONFIG_MAGIC_SYSRQ is not set

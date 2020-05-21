@@ -1,14 +1,16 @@
 rebuild_ppa
 ===========
 
-This script repackages kernels from Ubuntu kernel-ppa
+This script repackages kernels from Ubuntu kernel
+(https://code.launchpad.net/ubuntu/+source/linux-signed)
+or kernel-ppa
 (http://kernel.ubuntu.com/~kernel-ppa/mainline/) and builds a custom
 flavour with a tweaked config, emitting .deb files of the results.
 
 In full, it:
 
 - checks out the kernel tree
-- applies the patches listed in the SOURCES file
+- applies the patches listed in the SOURCES file (PPA)
 - can optionally apply a custom patch of your choosing
 - updates the config to build a new flavour
 - emits a kernel config for the new flavour with custom additions

@@ -7,5 +7,4 @@ participate in a circular dependency loop.
 This script was taken from that contributed by gnack at
 <http://forums.debian.net/viewtopic.php?f=10&t=74238>.
 
-It got upset on multiarch machines, so I added an easy(-ish) way to exclude
-architectures, and I've also updated it to python 3.
+I've updated it to python 3 and made it work more reliably on multiarch.

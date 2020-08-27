@@ -1,0 +1,17 @@
+Source: dpkg-find-cyclic-orphans
+Section: python
+Priority: optional
+Maintainer: Luke Ross <luke@lukeross.name>
+Build-Depends: debhelper (>= 7),
+               dh-python (>= 4),
+               python3 (>= 3)
+Standards-Version: 3.9.2
+X-Python-Version: >= 3.0
+
+Package: dpkg-find-cyclic-orphans
+Architecture: all
+Section: python
+Depends: python3-apt, ${misc:Depends}, ${python3:Depends}
+Description: Find cyclic deb loops
+ Find deb packages which are not marked as auto-removable because they
+ participate in a circular dependency loop.

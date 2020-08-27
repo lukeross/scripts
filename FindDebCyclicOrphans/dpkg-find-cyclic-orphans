@@ -1,27 +1,16 @@
 #!/usr/bin/env python3
 
-import argparse
 import apt_pkg
 
+holds = ['PreDepends', 'Depends', 'Recommends']
 pkgs = set()
 keeps = set()
+already_held = set()
 virtuals = {}
 
 apt_pkg.init()
 cache = apt_pkg.Cache()
 dep_cache = apt_pkg.DepCache(cache)
-
-parser = argparse.ArgumentParser(
-    description='Check for circular-dependency dpkg orphans')
-parser.add_argument(
-    '-x', nargs='*', help='Exclude these archs', default=[])
-parser.add_argument(
-    '-f', nargs='*',
-    help='Hold these fields, default: PreDepends Depends Recommends',
-    default=['PreDepends', 'Depends', 'Recommends'])
-args = parser.parse_args()
-exclude_archs = args.x
-holds = args.f
 
 
 def flag_provides(virtual, pkg):
@@ -32,8 +21,10 @@ def flag_provides(virtual, pkg):
 
 
 def hold_pkg(pkg):
-    if pkg.name in keeps:
+    if (pkg.name, pkg.architecture) in already_held:
         return
+
+    already_held.add((pkg.name, pkg.architecture))
 
     if pkg.current_ver:
         keeps.add(pkg.name)
@@ -41,15 +32,13 @@ def hold_pkg(pkg):
 
     if pkg.provides_list:
         flag_provides(pkg.name, pkg)
-        hold_provides(pkg.provides_list, pkg.name)
+        hold_provides(pkg.provides_list)
 
 
-def hold_provides(provides_list, from_pkg=''):
+def hold_provides(provides_list):
     for provides in provides_list:
-        if provides[2].parent_pkg.architecture not in exclude_archs:
-            flag_provides(provides[0], provides[2].parent_pkg)
-            if provides[2].parent_pkg.name != from_pkg:
-                hold_pkg(provides[2].parent_pkg)
+        flag_provides(provides[0], provides[2].parent_pkg)
+        hold_pkg(provides[2].parent_pkg)
 
 
 def hold_dependencies(dep_dict):
@@ -57,8 +46,7 @@ def hold_dependencies(dep_dict):
         if dep_type in holds:
             for dep in deps:
                 for opt in dep:
-                    if opt.target_pkg.architecture not in exclude_archs:
-                        hold_pkg(opt.target_pkg)
+                    hold_pkg(opt.target_pkg)
 
 
 def check_pkg(pkg):
@@ -78,8 +66,7 @@ def check_pkg(pkg):
 
 
 for pkg in cache.packages:
-    if pkg.architecture not in exclude_archs:
-        check_pkg(pkg)
+    check_pkg(pkg)
 
 print("\nHeld packages:")
 keeps = list(keeps)

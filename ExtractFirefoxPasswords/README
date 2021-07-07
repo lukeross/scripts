@@ -1,0 +1,10 @@
+extract_firefox_passwords
+=========================
+
+```
+extract_firefox_passwords.sh profile_directory master_password
+```
+
+Requires `jq` and `pwdecrypt` (in linbss3-utils).  If you have not set a master password, use the empty string.
+
+This is based on the examples at <https://blog.tajuma.com/?p=35>.
